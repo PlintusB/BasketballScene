@@ -30,7 +30,7 @@ public class TEST_PlayerMove : MonoBehaviour
             transform.right * sideMove;
         transform.Rotate(Vector3.up, Mathf.Repeat(rotateY, 360));
 
-        currentTime = Mathf.PingPong(Time.time, maxTime);
+        currentTime = Mathf.PingPong(Time.time, maxTime); 
         scale.fillAmount = currentTime / maxTime;
 
 

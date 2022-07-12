@@ -1,9 +1,11 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BallBehavior : MonoBehaviour
 {
     [SerializeField] private InputManager inputs;
-    [SerializeField] private PlayerStateManager playerState;    
+    [SerializeField] private PlayerStateManager playerState;
 
     public GameObject Ball { get; set; }
     
@@ -50,10 +52,13 @@ public class BallBehavior : MonoBehaviour
                 Ball.transform.localScale = Vector3.one * ballScale;
             }
 
-            if (inputs.TakeBall)
+            if (inputs.TakeBall && 
+                inputs.ForwardMoving == 0 && 
+                inputs.SideMoving == 0)
             {
                 isBallArrivedToHand = false;
-                PulsateBall(false);
+                playerState.IsMovingBlocked = true;
+                playerState.IsLookAroundBlocked = true;
             }            
         }
 
@@ -62,13 +67,12 @@ public class BallBehavior : MonoBehaviour
             Vector3 handsVector =
                 freeBallTrigger.bounds.center - Ball.transform.position;
 
-            print(handsVector.magnitude);
-
             BallRb = Ball.GetComponent<Rigidbody>();
             BallRb.velocity = handsVector.normalized;            
 
-            if (handsVector.magnitude < 0.02f)
+            if (handsVector.magnitude < 0.01f)
             {
+                PulsateBall(false);
                 ReadyToBeTaken = false; 
                 BallRb.velocity = Vector3.zero;
                 BallRb.isKinematic = true;
@@ -81,7 +85,7 @@ public class BallBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("Ball") && !playerState.IsHaveBall)
+        if(other.CompareTag("Ball") && !playerState.IsHaveBall && !ReadyToBeTaken)
         {
             ReadyToBeTaken = true;
             Ball = other.gameObject;
@@ -92,11 +96,11 @@ public class BallBehavior : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Ball") && !playerState.IsHaveBall)
+        if (other.gameObject == Ball)
         {
             ReadyToBeTaken = false;
             PulsateBall(false);
-            //Ball = null;
+            Ball = null;
         }
     }
 

@@ -6,27 +6,15 @@ public class MouseRotate : MonoBehaviour
     [SerializeField] private Transform mainCamera;
     [SerializeField] private float mouseSensitivity = 300f;
     private PlayerStateManager playerState;
-    private Rigidbody playerRb;
     private float yRotation;
     private float xRotation;
 
     void Awake()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
 
         playerState = GetComponent<PlayerStateManager>();
-        playerRb = GetComponent<Rigidbody>();
         yRotation = 0f;
-    }
-
-    private void FixedUpdate()
-    {
-        //if (!playerState.IsLookAroundBlocked)
-        //{
-        //    xRotation = inputs.Mouse_X * mouseSensitivity * 0.02f;
-        //    Quaternion rotation = Quaternion.Euler(Vector3.up * xRotation);
-        //    playerRb.MoveRotation(playerRb.rotation * rotation);
-        //}
     }
 
     void Update()

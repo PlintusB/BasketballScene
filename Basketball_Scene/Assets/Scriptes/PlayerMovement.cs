@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -46,16 +44,14 @@ public class PlayerMovement : MonoBehaviour
         {
             MovePlayer();
         }
-
     }
 
     private void Update()
     {
-
         if (!playerState.IsMovingBlocked)
         {
             ChangeTurboMode();
-            Jump();
+            if (inputs.Jump && IsGrounded) Jump();
         }
     }
 
@@ -74,14 +70,11 @@ public class PlayerMovement : MonoBehaviour
     {
         if (inputs.TurboModeOn) Speed *= coeffTurboMode;
         if (inputs.TurboModeOff) Speed /= coeffTurboMode;
-    }
+    }    
 
     public void Jump()
-    {
-        if (inputs.Jump && IsGrounded)
-        {
-            playerRb.velocity = 
-                new Vector3(playerRb.velocity.x, jumpPower, playerRb.velocity.z);
-        }
+    {       
+        playerRb.velocity = 
+            new Vector3(playerRb.velocity.x, jumpPower, playerRb.velocity.z);        
     }
 }

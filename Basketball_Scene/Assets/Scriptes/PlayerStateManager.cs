@@ -8,6 +8,7 @@ public class PlayerStateManager : MonoBehaviour
     public bool IsHaveBall { get; set; }
     public bool IsMovingBlocked { get; set; }
     public bool IsLookAroundBlocked { get; set; }
+    public bool IsControlTotalBlocked { get; set; }
 
     [SerializeField] private BallBehavior ballBeh;
 
@@ -22,10 +23,5 @@ public class PlayerStateManager : MonoBehaviour
 
         IsMovingBlocked = false;
         IsLookAroundBlocked = false;
-    }
-
-    void Update()
-    {
-        
     }
 }

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: ab18b08e7dad0dc429fe54d6a3a7ee4d
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Adam Warren pro
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 088e413b1ff682d4a91ce5597ede71cb, type: 3}
+  - {fileID: 12800000, guid: 1b5b3ba0ed7a0194d8439f4155a8c00a, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

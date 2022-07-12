@@ -16,11 +16,10 @@ public class GetAnimationsEvents : MonoBehaviour
     public void LookAroundBanOn() => playerState.IsLookAroundBlocked = true;
     public void LookAroundBanOff() => playerState.IsLookAroundBlocked = false;
     public void JumpDuringThrow() => playerMov.Jump();
-    //public void Throw() => throwManager.Throw();
+    public void Throw() => throwManager.Throw();
 
     public void BallBecameCharacterChild()
     {
-
         ballBeh.Ball.transform.SetParent(ballSlot.transform);
         playerState.IsHaveBall = true;
     }
@@ -28,11 +27,18 @@ public class GetAnimationsEvents : MonoBehaviour
     public void BallLeaveCharacter()
     {
         ballBeh.Ball.transform.SetParent(null);
+        ballBeh.BallRb.isKinematic = false;        
+        ballBeh.gameObject.SetActive(true);
         playerState.IsHaveBall = false;
     }
 
     public void ResetBallLocalPosition()
     {
         ballBeh.Ball.transform.localPosition = Vector3.zero;
+    }
+
+    public void ForgetTheBall()
+    {
+        ballBeh.Ball = null;
     }
 }

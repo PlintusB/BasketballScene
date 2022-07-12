@@ -24,7 +24,7 @@ public class AnimatorController : MonoBehaviour
 
     void Update()
     {
-        forwardMove = Mathf.Abs(inputs.ForwardMoving);
+        forwardMove = inputs.ForwardMoving;
 
         if (playerState.IsHaveBall) PlayAnimationsWithBall();
         if (!playerState.IsHaveBall) PlayEmptyAnimations();
@@ -40,11 +40,17 @@ public class AnimatorController : MonoBehaviour
             forwardMove < 0.01f)
             anim.SetTrigger("PutBall");
 
-        if (forwardMove > 0.01f)
+        if (forwardMove > 0.3f)
             anim.SetBool("RunWithBall", true);
 
-        if (forwardMove < 0.01f)
+        if (forwardMove < 0.3f)
             anim.SetBool("RunWithBall", false);
+
+        if (inputs.GetThrowPower)
+            anim.SetTrigger("GetThrowPower");
+
+        if (inputs.Throw)
+            anim.SetTrigger("Throw");
     }
 
     private void PlayEmptyAnimations()
@@ -58,12 +64,12 @@ public class AnimatorController : MonoBehaviour
             ballBeh.ReadyToBeTaken)
             anim.SetTrigger("TakeBall");
 
-        if (forwardMove < 0.01f)
+        if (forwardMove < 0.3f)
             anim.SetBool("RunEmpty", false);
 
-        if (forwardMove > 0.01f)
+        if (forwardMove > 0.3f)
             anim.SetBool("RunEmpty", true);
 
-        anim.SetBool("TurboRunEmpty", inputs.isTurboModeInAction);
+        anim.SetBool("TurboRunEmpty", inputs.IsTurboModeInAction);
     }
 }
